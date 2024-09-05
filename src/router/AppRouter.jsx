@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate, Outlet } from "react-router-dom"
 import { AuthRoutes } from '../auth/routes/AuthRoutes'
 import { LoginPage, RegisterPage } from "../auth/pages"
-// import { JournalPage } from "../journal/pages/JournalPage"
 import { AppTheme } from "../theme"
+import { JournalPage } from "../journal/pages/JournalPage"
 export const AppRouter = () => {
   return (
     <>
@@ -37,12 +37,14 @@ export const appRouter = createBrowserRouter([
           },
         ]
       },
+      {
+        path: '/journal',
+        element: <JournalPage />,
+      }
     ]
   },
   {
     path: '/*',
-    element: <Navigate to={'/'} />,
+    element: <Navigate to={'/journal'} />,
   }
-
-
 ])
