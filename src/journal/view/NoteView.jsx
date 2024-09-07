@@ -29,7 +29,7 @@ export const NoteView = () => {
       <Grid2 container size={12}>
 
         <TextField
-          type="tet"
+          type="text"
           variant="filled"
           fullWidth
           label='Title'

@@ -20,13 +20,16 @@ export const NothinSelectedView = () => {
       <Grid2
         size={12}
       >
-        <StartOutlined sx={{ fontSize: 100, color: 'white' }} />
+        <StartOutlined sx={{ fontSize: 50, color: 'white' }} />
       </Grid2>
 
       <Grid2
         size={12}
       >
-        <Typography variant="h5" color="white">Select a note</Typography>
+
+        <Typography variant="h5" color="white">
+          Select a note
+        </Typography>
       </Grid2>
     </Grid2>
   )

@@ -22,23 +22,22 @@ export const SideBar = ({ drawerWidth }) => {
           <Typography variant="h6" noWrap component={'div'}>Raul Ortega</Typography>
         </Toolbar>
         <Divider />
-        <List>
+        <List >
           {
-            ['1', '2', '3'].map(text => (
-              <ListItem key={text} disablePadding>
+            ['Enero', 'Febrero', 'Marzo'].map(text => (
+              <ListItem key={text} disablePaddin>
                 <ListItemButton>
                   <ListItemIcon>
-                    <TurnedInNot />
-                    <Grid2 container>
+                    <TurnedInNot sx={{ mt: 'auto', mb: 'auto', mr: 2, ml: -2 }} />
+                    <Grid2 container >
                       <ListItemText primary={text} secondary='pinche textote alv' />
                     </Grid2>
                   </ListItemIcon>
                 </ListItemButton>
               </ListItem>
             ))
-
-
           }
+
         </List>
       </Drawer>
     </Box>
