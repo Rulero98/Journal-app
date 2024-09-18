@@ -4,20 +4,24 @@ import { Button, Grid2, Link, TextField, Typography } from "@mui/material"
 import { AuthLayout } from "../layout/AuthLayout"
 import { useForm } from "../../hooks/useForm"
 import { useDispatch, useSelector } from "react-redux"
-import { checkingCredentials } from "../../store/auth/authSlice"
-import { startGoogleSignIn } from "../../store/auth/thunks"
+import { checkingCredentials, startGoogleSignIn } from "../../store/auth"
+import { useMemo } from "react"
 
 export const LoginPage = () => {
+
+  const { status } = useSelector(state => state.auth)
 
   const { email, password, onInputChange } = useForm({
     email: 'roavila18_98@outlook.com',
     password: '123456'
   })
+
+  const isAuthenticated = useMemo(() => status === 'checking', [status])
+
   const dispatch = useDispatch()
 
   const onSubmit = (e) => {
     e.preventDefault()
-
     dispatch(checkingCredentials())
   }
 
@@ -55,6 +59,7 @@ export const LoginPage = () => {
         <Grid2 container spacing={2} sx={{ mt: 2 }}>
           <Grid2 size={{ xs: 12, md: 6 }} >
             <Button
+              disabled={isAuthenticated}
               variant="contained"
               fullWidth
               type="submit"
@@ -64,6 +69,7 @@ export const LoginPage = () => {
           </Grid2>
           <Grid2 size={{ xs: 12, md: 6 }} >
             <Button
+              disabled={isAuthenticated}
               variant="contained"
               fullWidth
               onClick={onGoogleSignIn}
