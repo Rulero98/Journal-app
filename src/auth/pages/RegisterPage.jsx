@@ -1,13 +1,15 @@
-import { Button, Grid2, Link, TextField, Typography } from "@mui/material"
+import { Alert, Button, Grid2, Link, TextField, Typography } from "@mui/material"
 import { Link as RouterLink } from 'react-router-dom'
 import { AuthLayout } from "../layout/AuthLayout"
 import { useForm } from "../../hooks/useForm"
-import { useState } from "react"
+import { useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks"
 
 const formData = {
-  email: 'roavila18_98@outlook.com',
-  password: '12345678',
-  displayName: 'Raul Ortega'
+  email: '',
+  password: '',
+  displayName: ''
 }
 
 const formValidations = {
@@ -18,13 +20,19 @@ const formValidations = {
 
 export const RegisterPage = () => {
 
+  const dispatch = useDispatch()
   const [formSubmited, setFormSubmited] = useState(false)
 
-  const { displayName, email, password, onInputChange, formState, displayNameValid, emailValid, passwordValid, isFormValid } = useForm(formData, formValidations)
+  const { status, errorMessage } = useSelector(state => state.auth)
+  const isCheckingAuthentication = useMemo(() => status === 'checking', [status])
+
+  const { displayName, email, password, onInputChange, formState, displayNameValid, emailValid, passwordValid } = useForm(formData, formValidations)
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (!formSubmited) setFormSubmited(true)
+    setFormSubmited(true)
+    if (!formSubmited) return
+    dispatch(startCreatingUserWithEmailPassword(formState))
   }
 
   return (
@@ -79,10 +87,18 @@ export const RegisterPage = () => {
           </Grid2>
         </Grid2>
 
+        <Grid2
+          size={{ xs: 12 }}
+          display={errorMessage ? '' : 'none'}
+        >
+          <Alert severity="error">{errorMessage}</Alert>
+        </Grid2>
+
         {/* buttonCreateAccount */}
         <Grid2 container spacing={2} sx={{ mt: 2 }}>
           <Grid2 size={{ xs: 12 }} >
             <Button
+              disabled={isCheckingAuthentication}
               type="submit"
               variant="contained"
               fullWidth>Create account</Button>
