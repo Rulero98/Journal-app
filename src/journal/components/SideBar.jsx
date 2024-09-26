@@ -25,7 +25,7 @@ export const SideBar = ({ drawerWidth }) => {
         <List >
           {
             ['Enero', 'Febrero', 'Marzo'].map(text => (
-              <ListItem key={text} disablePaddin>
+              <ListItem key={text} >
                 <ListItemButton>
                   <ListItemIcon>
                     <TurnedInNot sx={{ mt: 'auto', mb: 'auto', mr: 2, ml: -2 }} />

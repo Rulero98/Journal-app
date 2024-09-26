@@ -1,50 +1,23 @@
-import { createBrowserRouter, Navigate, Outlet } from "react-router-dom"
-import { AuthRoutes } from '../auth/routes/AuthRoutes'
-import { LoginPage, RegisterPage } from "../auth/pages"
-import { AppTheme } from "../theme"
-import { JournalPage } from "../journal/pages/JournalPage"
+import { RouterProvider } from "react-router-dom"
+import { authRouter } from "../auth/routes/AuthRoutes"
+
+import { journalRouter } from "../journal/routes/JournalRoutes"
+import { useCheckAuth } from "../hooks/useCheckAuth"
+
+import { CheckingAuth } from "../ui"
+
 export const AppRouter = () => {
+  const { status } = useCheckAuth()
+  if (status === 'checking') {
+    return <CheckingAuth />
+  }
   return (
     <>
-      <AppTheme>
-        <Outlet />
-      </AppTheme>
+      {
+        (status === 'authenticated')
+          ? <RouterProvider router={journalRouter} />
+          : <RouterProvider router={authRouter} />
+      }
     </>
   )
 }
-
-export const appRouter = createBrowserRouter([
-  {
-    path: '/',
-    element: <AppRouter />,
-    children: [
-      {
-        path: '/auth',
-        element: <AuthRoutes />,
-        children: [
-
-          {
-            path: 'login',
-            element: <LoginPage />,
-          },
-          {
-            path: 'register',
-            element: <RegisterPage />,
-          },
-          {
-            path: '*',
-            element: <Navigate to={'/auth/login'} />,
-          },
-        ]
-      },
-      {
-        path: '/journal',
-        element: <JournalPage />,
-      }
-    ]
-  },
-  {
-    path: '/*',
-    element: <Navigate to={'/journal'} />,
-  }
-])
