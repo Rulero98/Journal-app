@@ -4,7 +4,6 @@ import { JournalPage } from "../pages/JournalPage"
 export const JournalRoutes = () => {
   return (
     <>
-      <div>AppRouter</div>
       <Outlet />
     </>
   )
@@ -13,7 +12,13 @@ export const JournalRoutes = () => {
 export const journalRouter = createBrowserRouter([
   {
     path: '/',
-    element: <JournalPage />,
+    element: <JournalRoutes />,
+    children: [
+      {
+        path: '/',
+        element: <JournalPage />
+      }
+    ]
   },
   {
     path: '/*',

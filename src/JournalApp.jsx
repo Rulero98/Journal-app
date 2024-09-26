@@ -1,10 +1,15 @@
-import { RouterProvider } from "react-router-dom"
-import { appRouter } from "./router/AppRouter"
+import { AppTheme } from "./theme/AppTheme"
+import {AppRouter} from './router/AppRouter'
 
 export const JournalApp = () => {
+
+
+
   return (
     <>
-      <RouterProvider router={appRouter} />
+      <AppTheme >
+        <AppRouter />
+      </AppTheme>
     </>
   )
 }
