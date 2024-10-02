@@ -38,7 +38,7 @@ export const RegisterPage = () => {
   return (
     <AuthLayout title="Register">
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='animate__animated animate__fadeIn'>
         <Grid2 container>
 
           {/* Full name */}
