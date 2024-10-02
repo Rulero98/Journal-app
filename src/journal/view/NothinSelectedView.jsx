@@ -3,7 +3,7 @@ import { Grid2, Typography } from "@mui/material"
 
 export const NothinSelectedView = () => {
   return (
-    <Grid2
+    <Grid2 className= 'animate__animated animate__fadeIn'
       container
       spacing={0}
       direction={'column'}
