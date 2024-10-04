@@ -10,7 +10,7 @@ export const ImageGallery = ({ images }) => {
       cols={3}
       gap={8}
     >
-      {images.map((item) => (
+      {images?.map((item) => (
         <ImageListItem
           key={item}
         >

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { useSelector } from "react-redux"
 import { SideBarItem } from "./"
 
-
 export const SideBar = ({ drawerWidth }) => {
 
   const { displayName } = useSelector(state => state.auth)
@@ -31,7 +30,7 @@ export const SideBar = ({ drawerWidth }) => {
         <List >
           {
             notes.map(note => (
-              <SideBarItem key={note.id } {...note} />
+              <SideBarItem key={note.id} {...note} />
             ))
           }
 
